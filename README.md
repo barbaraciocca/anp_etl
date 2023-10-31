@@ -25,7 +25,7 @@ Note:
 
  You must have docker-composer installed on your computer.
 
- To see the desired table, named ```vendas_combustiveis``` you will need to open a database administration tool, e.g. DBeaver.
+ To see the desired table, called ```vendas_combustiveis```, you will need to open a database administration tool, e.g. DBeaver.
 
 
 - Run the project:
