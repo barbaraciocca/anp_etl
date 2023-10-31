@@ -41,6 +41,16 @@ docker-compose up --build
 
 --> Open your database administration tool to see the created table.
 
+Create a new connection with Postgress, using these credentials:
+```
+host: localhost
+password: airflow
+user: airflow
+port: 5432
+database: airflow
+```
+
+
 ## Data format
 
 The data was formatted in the following format
