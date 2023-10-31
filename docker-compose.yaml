@@ -1,0 +1,41 @@
+version: '3.7'
+services:
+    postgres:
+        image: postgres:9.6
+        environment:
+            - POSTGRES_USER=airflow
+            - POSTGRES_PASSWORD=airflow
+            - POSTGRES_DB=airflow
+        ports:
+            - 5432:5432
+        logging:
+            options:
+                max-size: 10m
+                max-file: "3"
+
+    webserver:
+        build: .
+        restart: always
+        depends_on:
+            - postgres
+        environment:
+            - LOAD_EX=n
+            - EXECUTOR=Local
+        logging:
+            options:
+                max-size: 10m
+                max-file: "3"
+        volumes:
+            - ${AIRFLOW_PROJ_DIR:-.}/dags:/opt/airflow/dags
+            - ${AIRFLOW_PROJ_DIR:-.}/logs:/opt/airflow/logs
+            - ${AIRFLOW_PROJ_DIR:-.}/plugins:/opt/airflow/plugins
+            - ${AIRFLOW_PROJ_DIR:-.}/airflow/:/opt/airflow/
+            - ${AIRFLOW_PROJ_DIR:-.}/raw_data:/opt/airflow/raw_data
+        ports:
+            - "8080:8080"
+        command: webserver
+        healthcheck:
+            test: ["CMD-SHELL", "[ -f /usr/local/airflow/airflow-webserver.pid ]"]
+            interval: 30s
+            timeout: 30s
+            retries: 3
