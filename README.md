@@ -39,6 +39,7 @@ docker-compose up --build
 --> Open ```localhost:8080``` in your browser. 
     The user and the password are: ```admin```.
 
+--> Open your database administration tool to see the created table.
 
 ## Data format
 
